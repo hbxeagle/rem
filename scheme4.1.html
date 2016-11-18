@@ -1,0 +1,49 @@
+<html style="">
+<head>
+  <meta charset="UTF-8">
+  <meta content="telephone=no" name="format-detection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>rem test scheme4.1</title>
+  <style>
+    *,html,body,div,p {
+      padding:0;
+      margin: 0;
+      color: #fff;
+      line-height:1.2;
+    }
+  </style>
+</head>
+<body>
+  <div id="bg" style="width:6.4rem;background:rgb(0,86,128);min-height:100%">
+    <p id="foo" style="width:1rem;height:1rem;font-size:.32rem;background:rgb(255,169,117)">1rem</p>
+    <div id="font" style="font-size:.32rem"></div>
+  </div>
+  <script>
+    var h = document.getElementsByTagName('html')[0];
+    var el = document.getElementById('foo');
+    var bg = document.getElementById('bg');
+    var beforeRootFontSize = window.getComputedStyle(h, null).getPropertyValue('font-size');
+
+    var designWidth = 640, rem2px = 100;
+    var h = document.getElementsByTagName('html')[0];
+    var htmlFontSize = parseFloat(window.getComputedStyle(h, null).getPropertyValue('font-size'));
+    document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / htmlFontSize * 100 + '%';
+
+    var afterRootFontSize = window.getComputedStyle(h, null).getPropertyValue('font-size');
+
+    var pfontSize = window.getComputedStyle(el, null).getPropertyValue('width');
+    var bgwidth = window.getComputedStyle(bg, null).getPropertyValue('width');
+
+    document.getElementById('font').innerHTML = ''
+    + "<br> 设置前html的 fontSize: " + beforeRootFontSize
+    + "<br> html fontSize的设置值: " + h.style.fontSize
+    + "<br> 设置后html的 fontSize: " + afterRootFontSize
+    + "<br>  1rem 目标值: " + (window.innerWidth/640 * 100)
+    + "<br>  1rem 实际值: " + pfontSize
+    + "<br> 6.4rem 目标值: " + window.innerWidth + "（屏宽）" 
+    + "<br> 6.4rem 实际值: " + bgwidth
+    + "<br> 6.4rem 计算值: " + (6.4 * (window.innerWidth/640 * 100)) + "（按公式计算）"
+    + "<br> 6.4rem 计算值: " + (6.4 * parseFloat(afterRootFontSize)) + "（按设置后html的fontSize计算）"
+  </script>
+</body>
+</html>

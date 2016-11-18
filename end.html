@@ -1,0 +1,65 @@
+<html style="">
+<head>
+  <meta charset="UTF-8">
+  <meta content="telephone=no" name="format-detection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>rem test end</title>
+  <script>
+    var h = document.getElementsByTagName('html')[0];
+    var beforeRootFontSize = window.getComputedStyle(h, null).getPropertyValue('font-size');
+    var defaultFontSize;
+    function adapt(designWidth, rem2px){
+      var d = window.document.createElement('div');
+      d.style.width = '1rem';
+      d.style.display = "none";
+      var head = window.document.getElementsByTagName('head')[0];
+      head.appendChild(d);
+      var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+      d.remove();
+      document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+      var st = document.createElement('style');
+      var portrait = "@media screen and (min-width: "+window.innerWidth+"px) {html{font-size:"+ ((window.innerWidth/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}";
+      var landscape = "@media screen and (min-width: "+window.innerHeight+"px) {html{font-size:"+ ((window.innerHeight/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}"
+      st.innerHTML = portrait + landscape;
+      head.appendChild(st);
+      return defaultFontSize
+    };
+    defaultFontSize = adapt(640, 100);
+    var afterRootFontSize = window.getComputedStyle(h, null).getPropertyValue('font-size');
+  </script>
+  <style>
+    *,html,body,div,p {
+      padding:0;
+      margin: 0;
+      color: #fff;
+      line-height:1.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="bg" style="width:6.4rem;background:rgb(0,86,128);min-height:100%">
+    <p id="foo" style="width:1rem;height:1rem;font-size:.32rem;background:rgb(255,169,117)">1rem</p>
+    <div id="font" style="font-size:.32rem"></div>
+  </div>
+  <script>
+    var el = document.getElementById('foo');
+    var bg = document.getElementById('bg');
+
+    var pfontSize = window.getComputedStyle(el, null).getPropertyValue('width');
+    var bgwidth = window.getComputedStyle(bg, null).getPropertyValue('width');
+
+    document.getElementById('font').innerHTML = ''
+    + "<br> 设置前html的 fontSize: " + beforeRootFontSize
+    + "<br> 设置前1rem的宽度: " + defaultFontSize + "（浏览器默认字体大小精确值）"
+    + "<br> html fontSize的设置值: " + h.style.fontSize
+    + "<br> 设置后html的 fontSize: " + afterRootFontSize
+    + "<br>  1rem 目标值: " + (window.innerWidth/640 * 100)
+    + "<br>  1rem 实际值: " + pfontSize
+    + "<br> 6.4rem 目标值: " + window.innerWidth + "（屏宽）"
+    + "<br> 6.4rem 实际值: " + bgwidth
+    + "<br> 6.4rem 计算值: " + (6.4 * (window.innerWidth/640 * 100)) + "（按公式计算）"
+    + "<br> 6.4rem 计算值: " + (6.4 * parseFloat(afterRootFontSize)) + "（按设置后html的fontSize计算）"
+    + "<br> 6.4rem 计算值: " + (6.4 * (parseFloat(h.style.fontSize)/100) * defaultFontSize) + "（按html fontSize设置值和浏览器默认字体大小精确值计算）"
+  </script>
+</body>
+</html>
