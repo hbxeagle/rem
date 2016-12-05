@@ -260,7 +260,7 @@ function adapt(designWidth, rem2px){
   head.appendChild(d);
   var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
   d.remove();
-  document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+  // document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
   var st = document.createElement('style');
   var portrait = "@media screen and (min-width: "+window.innerWidth+"px) {html{font-size:"+ ((window.innerWidth/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}";
   var landscape = "@media screen and (min-width: "+window.innerHeight+"px) {html{font-size:"+ ((window.innerHeight/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}"
@@ -277,6 +277,8 @@ var defaultFontSize = adapt(640, 100);
 by bx 2016.11.20
 
 
+评论中提到dpr大于1的时候，1px 的问题，本方案中是没有涉及到。解决思路是设置单独的样式特殊处理。『[Retina屏的移动设备如何实现真正1px的线？](http://jinlong.github.io/2015/05/24/css-retina-hairlines/)』此文介绍的很详细，珠玉在前，就不献丑了。
 
+此外rem还有一个问题就是对精灵图的适配，本人开发了一个命令行工具[sprites-cli](https://www.npmjs.com/package/sprites-cli)，用来处理这个问题（测试阶段，可能还不是太成熟）。
 
-
+by 2016.12.06
