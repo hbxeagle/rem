@@ -282,3 +282,7 @@ by bx 2016.11.20
 此外rem还有一个问题就是对精灵图的适配，本人开发了一个命令行工具[sprites-cli](https://www.npmjs.com/package/sprites-cli)，用来处理这个问题（测试阶段，可能还不是太成熟）。
 
 by 2016.12.06
+
+思而不学则殆，优化了一下此方案[前端：『REM』手机屏幕高清适配方案](./HD_ADAPTER.md)。
+
+by 2016.12.14
