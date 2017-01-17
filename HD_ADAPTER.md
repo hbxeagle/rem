@@ -79,7 +79,7 @@ REM适配主要解决在不同屏幕宽度下，布局和元素尺寸保持一�
       d.style.display = "none";
       docEl.firstElementChild.appendChild(d);
       var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
-      d.remove();
+      // d.remove();
       var portrait = "@media screen and (width: "+ width +"px) {html{font-size:"+ ((width/(_designWidth/_rem2px)/defaultFontSize)*100) +"%;}}";
       var dpStyleEl = doc.getElementById('dpAdapt');
       if(!dpStyleEl) {
