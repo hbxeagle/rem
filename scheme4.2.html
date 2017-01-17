@@ -31,7 +31,7 @@
     var head = window.document.getElementsByTagName('head')[0];
     head.appendChild(d);
     var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
-    d.remove();
+    // d.remove();
     document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
 
     var afterRootFontSize = window.getComputedStyle(h, null).getPropertyValue('font-size');

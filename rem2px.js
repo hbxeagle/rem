@@ -5,7 +5,7 @@ function adapt(designWidth, rem2px){
   var head = window.document.getElementsByTagName('head')[0];
   head.appendChild(d);
   var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
-  d.remove();
+  // d.remove();
   // document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
   var st = document.createElement('style');
   var portrait = "@media screen and (min-width: "+window.innerWidth+"px) {html{font-size:"+ ((window.innerWidth/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}";
