@@ -1,5 +1,11 @@
 # 了解真实的『REM』手机屏幕适配
 
+> [前端：『REM』手机屏幕高清适配方案](./HD_ADAPTER.md)。
+
+> 高清适配方案中iPhone X全屏兼容：<br>1、需要在viewport中添加 `viewport-fit=cover`，js和meta标签中都要添加；<br>2、同时iPhone X屏幕底部圆弧区域占位高度使用 `calc(constant(safe-area-inset-bottom) * 3)` 作为`padding-bottom`， `margin-bottom`等高度属性的值。iPhone X上，高清适配方案中，此值等价于`.34rem`，即`34`逻辑像素。根据实际情况可以修改`* 3`这个系数来调整占位区域的高度，但一定要使用`constant(safe-area-inset-bottom)`。在ios11下，非iPhone X的设备此值为`0`，使用时需要注意样式覆盖的情况。
+
+*以下为正文*
+
 `rem` 作为一个低调的长度单位，由于手机端网页的兴起，在屏幕适配中得到重用。使用 `rem` 前端开发者可以很方便的在各种屏幕尺寸下，通过`等比缩放`的方式达到设计图要求的效果。<br/>
 
 `rem` 的官方定义『The font size of the root element.』，即以根节点的字体大小作为基准值进行长度计算。一般认为网页中的根节点是 `html` 元素，所以采用的方式也是通过设置 `html` 元素的 `font-size` 来做屏幕适配，但实际情况真有这么简单吗？
