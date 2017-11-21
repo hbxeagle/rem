@@ -1,9 +1,11 @@
 function adapt(designWidth, rem2px){
-  var d = window.document.createElement('div');
+  var doc = window.document;
+  var d = doc.createElement('div');
   d.style.width = '1rem';
   d.style.display = "none";
-  var head = window.document.getElementsByTagName('head')[0];
-  head.appendChild(d);
+  var head = doc.getElementsByTagName('head')[0];
+  var body = doc.body;
+  body.appendChild(d);
   var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
   // d.remove();
   // document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
